@@ -1,0 +1,30 @@
+{
+  "name": "armandoblog",
+  "version": "1.0.0",
+  "description": "A blog where you can post anything you would like.",
+  "main": "app.js",
+  "scripts": {
+    "test": "\"no test command\"",
+    "pretest": "eslint --ignore-path .gitignore .",
+    "start": "DEBUG=app,app:* nodemon app.js"
+  },
+  "keywords": [
+    "blog",
+    "armando",
+    "ejs",
+    "fullstack"
+  ],
+  "author": "Armando Salinas",
+  "license": "MIT",
+  "dependencies": {
+    "ejs": "^3.1.3",
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "chalk": "^4.1.0",
+    "debug": "^4.1.1",
+    "eslint": "^7.3.1",
+    "morgan": "^1.10.0",
+    "nodemon": "^2.0.4"
+  }
+}
