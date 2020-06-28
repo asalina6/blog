@@ -1,0 +1,34 @@
+@import '_reset.scss';
+@import '_normalize.scss';
+
+$content-width: 80%;
+
+:root{
+    --background-color:#D7F2BA;
+    --inner-background:#9CC69B;//#BDE4A8;
+    --font-color:#676F54;
+    --font-family:arial;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+*::before,
+*::after {
+    box-sizing: inherit;
+}
+
+html,
+body {
+    height: 100%;
+    width: 100%;
+    line-height:1.4;
+    background: var(--background-color);
+}
+main{
+    background: var(--inner-background);
+}
+
+@import '_header.scss';
+@import '_main.scss';

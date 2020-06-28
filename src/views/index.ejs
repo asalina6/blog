@@ -1,34 +1,66 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Armando's Blog</title>
-    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/styles.css">
 </head>
+
 <body>
     <header>
         <img src="https://gosw.org/wp-content/uploads/2020/03/logo-Placeholder.png" alt="armando-logo">
         <nav>
             <ul>
-                <li><a href="#">Home</a></li>
-                <li><a href="#">About</a></li>
-                <li><a href="#">Profile</a></li>
-                <li><a href="#">Logout</a></li>
+                <% for(let i=0;i<nav.length;i++){%>
+                <li><a href="<%=nav[i].link%>"><%=nav[i].title%></a></li>
+                <%}%>
             </ul>
         </nav>
     </header>
     <main>
         <div class="grid-container">
-            <div class="blogpost">
-                <img src="" alt="">
-                <h3>Title goes here</h3>
+            <div class="sub-grid">
+                <div class="blogpost">
+                    <img src="" alt="">
+                    <h3>Title goes here</h3>
+                </div>
+                <div class="blogpost">
+                    <img src="" alt="">
+                    <h3>Title goes here</h3>
+                </div>
+                <div class="blogpost">
+                    <img src="" alt="">
+                    <h3>Title goes here</h3>
+                </div>
+                <div class="blogpost">
+                    <img src="" alt="">
+                    <h3>Title goes here</h3>
+                </div>
+                <div class="blogpost">
+                    <img src="" alt="">
+                    <h3>Title goes here</h3>
+                </div>
+                <div class="blogpost">
+                    <img src="" alt="">
+                    <h3>Title goes here</h3>
+                </div>
+                <div class="blogpost">
+                    <img src="" alt="">
+                    <h3>Title goes here</h3>
+                </div>
+                <div class="blogpost">
+                    <img src="" alt="">
+                    <h3>Title goes here</h3>
+                </div>
             </div>
         </div>
-    </main>
-    <aside>
+        <aside>
 
-    </aside>
+        </aside>
+    </main>
+
     
 </body>
 </html>

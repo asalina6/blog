@@ -1,0 +1,31 @@
+main{
+    width:$content-width;
+    margin:auto;
+    margin-top:1em;
+    height:90vh;
+    border-radius:5px;
+    overflow:hidden;
+    .grid-container{
+        width:100%;
+        overflow:hidden;
+    .sub-grid{
+        width:60%;
+        display:grid;
+        grid-template-columns:1fr 1fr;
+        column-gap:1em;
+        row-gap: 1em;
+        justify-items:center;
+        align-items:center;
+        align-content:stretch;
+        overflow:hidden;
+        .blogpost{
+            //$heightWidthRatio:calc(3.5/2.5);
+            --card-width:10vw;
+            width:var(--card-width);
+            height:calc(3.5/2.5*var(--card-width));
+            background:red;
+            display:inline-block;
+        }
+    }
+}
+}
