@@ -8,7 +8,7 @@ module.exports = {
     mode: 'development',
     target: 'web', //could use node instead
     devtool: 'cheap-module-source-map',
-    entry: path.resolve(__dirname,'src/index'),
+    entry: path.resolve(__dirname,'src/index.html'),
     output: {
         path: path.resolve(__dirname, 'build'),
         publicPath: '/',
@@ -28,11 +28,15 @@ module.exports = {
         }),
         new HtmlWebpackPlugin({
             template: "src/index.html",
-            favicon: "src/favicon.ico"
+            //favicon: "src/favicon.ico"
         })
     ],
     module: {
         rules: [
+            {
+                test:/\.html/,
+                loader: 'html-loader'
+            },
             {
                 test: /\.(js|jsx)$/,
                 exclude: /node_modules/,

@@ -7,7 +7,7 @@
     "test": "\"no test command\"",
     "pretest": "eslint --ignore-path .gitignore .",
     "start": "DEBUG=app,app:* nodemon app.js",
-    "dev": "webpack-dev-server --config webpack.config.dev.js --port 3000"
+    "dev": "webpack-dev-server --config webpack.config.js --port 3000"
   },
   "keywords": [
     "blog",
@@ -39,6 +39,8 @@
     "eslint": "^7.3.1",
     "eslint-loader": "^4.0.2",
     "html-loader": "^1.1.0",
+    "html-webpack-plugin": "^4.3.0",
+    "json-server": "^0.16.1",
     "morgan": "^1.10.0",
     "nodemon": "^2.0.4",
     "postcss-loader": "^3.0.0",

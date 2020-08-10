@@ -29,10 +29,6 @@ const adminRouter = require('./src/routes/adminRoutes')();
 app.use('/home', homeRouter);
 app.use('/admin', adminRouter);
 
-app.get('/', (req,res)=>{
-    res.render('index', {nav});
-});
-
 app.listen(port, ()=>{
     debug(chalk.green(`Listening on port ${port}`));
 });
