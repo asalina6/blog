@@ -21,15 +21,17 @@ app.set('view engine', 'ejs');
 
 //Routers and Router functions
 const homeRouter = require('./src/routes/homeRoutes')(nav);
+const adminRouter = require('./src/routes/adminRoutes')();
 // const aboutRouter = require('./');
 // const profileRouter = require('./');
 
 //applying router middleware, mounting them on their paths
 app.use('/home', homeRouter);
+app.use('/admin', adminRouter);
 
 app.get('/', (req,res)=>{
     res.render('index', {nav});
-})
+});
 
 app.listen(port, ()=>{
     debug(chalk.green(`Listening on port ${port}`));

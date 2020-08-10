@@ -5,12 +5,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Armando's Blog</title>
+    <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/css/styles.css">
+    <style>
+        *{
+            font-family: 'Roboto', 'Arial', sans-serif;
+        }
+        h2{
+            font-family: 'Anton', 'Arial', sans-serif;
+        }
+    </style>
 </head>
 
 <body>
     <header>
-        <img src="https://gosw.org/wp-content/uploads/2020/03/logo-Placeholder.png" alt="armando-logo">
+        <div class="image-container">
+            <img src="https://freesvg.org/img/Prismatic-Perforated-Mandala-No-Background.png" alt="armando-logo">
+        </div>
+        <h1>Armando's Blog</h1>
         <nav>
             <ul>
                 <% for(let i=0;i<nav.length;i++){%>
@@ -22,42 +35,25 @@
     <main>
         <div class="grid-container">
             <div class="sub-grid">
+            <% for(let i=0; i<6;i++){%>
                 <div class="blogpost">
-                    <img src="" alt="">
-                    <h3>Title goes here</h3>
+                    <div class="image-container">
+                        <img src="https://picsum.photos/200/300" alt="blog-image-1">
+                    </div>
+                    <h2>Title goes here</h2>
+                    <p>A paragraph of about 30 words should go here before <br/><a href="#">...see more</a> </p>
                 </div>
-                <div class="blogpost">
-                    <img src="" alt="">
-                    <h3>Title goes here</h3>
-                </div>
-                <div class="blogpost">
-                    <img src="" alt="">
-                    <h3>Title goes here</h3>
-                </div>
-                <div class="blogpost">
-                    <img src="" alt="">
-                    <h3>Title goes here</h3>
-                </div>
-                <div class="blogpost">
-                    <img src="" alt="">
-                    <h3>Title goes here</h3>
-                </div>
-                <div class="blogpost">
-                    <img src="" alt="">
-                    <h3>Title goes here</h3>
-                </div>
-                <div class="blogpost">
-                    <img src="" alt="">
-                    <h3>Title goes here</h3>
-                </div>
-                <div class="blogpost">
-                    <img src="" alt="">
-                    <h3>Title goes here</h3>
-                </div>
-            </div>
+            <%}%>
         </div>
         <aside>
-
+            <!-- inspiration: https://deviq.com/repository-pattern/-->
+            <label for="searchbar"><h3>Live Search</h3></label>
+            <input type="search" id="searchbar" name="searchbar" placeholder="Type your inquiry here!"/>
+            <h3>Tags</h3>
+            <h3>Popular Posts</h3>
+            <ul>(picture of a post) post_title</ul>
+            <h3>Recent Posts</h3>
+            <a href="#">January</a>
         </aside>
     </main>
 
