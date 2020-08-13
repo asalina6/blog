@@ -1,0 +1,27 @@
+nav{
+    width:45%;
+    margin-left:auto;
+    ul{
+        display:flex;
+        flex-direction:row;
+        justify-content:space-around;
+        list-style-type:none;
+        justify-items:center;
+        position:relative;
+        top:50%;
+        transform: translateY(-50%);
+        li{
+            display:inline-block;
+            background:#8789C0;
+            a{
+                font-family:var(--font-family);
+                font-weight:700;
+                text-decoration:none;
+                color:#BDE4A8;//var(--font-color);
+                text-align:center;
+                vertical-align:center;
+                text-transform:uppercase;
+            }
+        }
+    }
+}
