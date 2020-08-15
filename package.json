@@ -1,5 +1,6 @@
 {
   "name": "armandoblog",
+  "private": true,
   "version": "1.0.0",
   "description": "A blog where you can post anything you would like.",
   "main": "index.js",
