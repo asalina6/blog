@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
 const fs = require("fs");
 const path = require("path");
-const mockData = require("./mockMongoData.js");
+const mockData = require("../mockMongoData.js");
 
 const { posts, users } = mockData;
 const data = JSON.stringify({ posts, users });

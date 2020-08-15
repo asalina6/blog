@@ -1,13 +1,13 @@
 @import '_reset.scss';
 @import '_normalize.scss';
-
-$content-width: 80%;
+@import url('https://fonts.googleapis.com/css2?family=Alata&display=swap');
 
 :root{
     --background-color:#D7F2BA;
     --inner-background:#9CC69B;//#BDE4A8;
     --font-color:#676F54;
     --font-family:arial;
+    --content-width: 80%;
 }
 
 * {
@@ -32,3 +32,5 @@ main{
 
 @import '_Header.scss';
 @import '_Main.scss';
+@import '_LoginPage.scss';
+@import '_PageNotFound.scss';

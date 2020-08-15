@@ -1,0 +1,41 @@
+.form-container{
+    width: var(--content-width);
+    margin:auto;
+    margin-top:1em;
+    height:80vh;
+    border-radius:5px;
+    overflow:hidden;
+    background: var(--inner-background);
+    box-shadow: 1px 11px 26px -8px rgba(0, 0, 0, 0.75);
+    position:relative;
+    display:grid;
+    justify-content:center;
+    form{
+        display:block;
+        margin:auto;
+        width:50vh;
+        height:50vh;
+        background:red;
+        position:relative;
+        padding: 1em;
+        border: 1px solid #CCC;
+        border-radius: 1em;
+        label{
+            display:block;
+            margin:auto;
+            margin-bottom:1em;
+            text-align:center;
+        }
+        input{
+            display:block;
+            margin:auto;
+            margin-bottom:1em;
+            text-align:center;
+        }
+        button{
+            display:block;
+            text-align:center;
+            margin:auto;
+        }
+    }
+}

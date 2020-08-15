@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 function Header({signedIn}){ //eslint-disable-line
     return(
@@ -17,7 +18,9 @@ function Nav({signedIn}){ //eslint-disable-line
         <>
             <nav>
                 <ul>
-                    <li><a href="#"></a></li>
+                    <li><Link to="/">Home</Link></li>
+                    <li><Link to="/about">About</Link></li>
+                    <li><a href="#">Posts</a></li>
                 </ul>
             </nav>
            <SigninBox signedIn={signedIn}/>
@@ -29,13 +32,13 @@ function SigninBox({signedIn}){
     if(!signedIn){
         return(
             <div className="signinBox">
-                SignIn
+                <Link to="/signin">Sign In / Sign Up</Link>
             </div>
         );
     } else{
         return(
             <div className="signinBox">
-                SignOut
+                <Link to="/signout">Signout</Link>
             </div>
         );
     }

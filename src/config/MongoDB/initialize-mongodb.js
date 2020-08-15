@@ -1,5 +1,5 @@
 import { connectDB } from './connect-mongodb.js';
-const defaultState = require('./mockMongoData.js');
+const defaultState = require('../mockMongoData.js');
 console.log(defaultState);
 
 (async function initializeDB(){
