@@ -1,5 +1,9 @@
 import { MongoClient } from 'mongodb';
-const url = 'mongodb://localhost:27017';
+import { DB_NAME, BLOG_POSTS, USERS, MDB_URL }from './credentials.js'; //eslint-disable-line
+const dotenv = require('dotenv');
+dotenv.config({path: '../../credentials.env'});
+
+const url = process.env.MDB_URL;
 let db = null;
 
 export async function connectDB(){
@@ -10,8 +14,8 @@ export async function connectDB(){
     let client;
     try{
         client = await MongoClient.connect(url, {useNewUrlParser: true, useUnifiedTopology: true });
-        db = client.db('armandoblog');
-        console.log("Got DB", db);
+        db = client.db(process.env.DB_NAME);
+        console.log("DB should be connected");
         return db;
     }catch(err){
         console.log(err);
