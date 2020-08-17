@@ -20,7 +20,7 @@ function Login(props) { //eslint-disable-line
                     onChange={e => setUsername(e.target.value)}
                 />
                 <label htmlFor="password">Password</label>
-                <input
+                <indput
                     type="password"
                     id="password"
                     name="password"

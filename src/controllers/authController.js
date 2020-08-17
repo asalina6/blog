@@ -7,7 +7,7 @@ function authController() {
 
     dotenv.config({path: '../credentials.env'});
 
-    function register(req, res) {
+    function register(req, res) { //eslint-disable-line
         console.log(req.body);
     }
 
@@ -16,7 +16,7 @@ function authController() {
             const { username, password } = req.body;
             const passwordhash = md5(password);
 
-            if(!email || !password){
+            if(!username || !password){
                 return res.render(400);
                 //user did not input email or password
             }
@@ -40,7 +40,17 @@ function authController() {
                 //jwt token time.
                 const token = jwt.sign({ id }, process.env.JWT_SECRET,{
                     expiresIn: process.env.JWT_EXPIRES_IN
-                });
+                }, (err, token) => console.log(token));
+
+                const cookieOptions = {
+                    expires: new Date(
+                        Date.now() + process.env.JWT_COOKIE_EXPIRES *24 * 60 * 60 * 1000
+                    ),
+                    httpOnly: true
+                }
+
+                res.cookie('jwt', token, cookieOptions);
+                res.status(200).redirect("/");
             }
 
 
@@ -54,4 +64,4 @@ function authController() {
         login
     })
 }
-module.exports = bookController;
+module.exports = authController;

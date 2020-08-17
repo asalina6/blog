@@ -5,7 +5,7 @@ const morgan = require('morgan');
 const chalk = require('chalk');
 const path = require('path');
 const dotenv = require(dotenv);
-import { connectDB } from './config/MongoDB/connect-mongodb.js';
+const cookieParser = require('cookie-parser');
 
 dotenv.config({path:'./credentials.env'});
 const app = express();
@@ -23,6 +23,7 @@ app.use(express.static(path.join(__dirname, 'src')));
 
 app.use(
   cors(),
+  cookieParser(),
   //bodyParser is considered obsolete, use express.JSON
   //bodyParser.urlencoded({ extended: true }),
   //bodyParser.json()
@@ -30,22 +31,11 @@ app.use(
   express.json()
 );
 
-//Testing our posting
 
-export const addNewBlogPost = async (blogPost) => {
-  let db = await connectDB(process.env.DB_NAME);
-  let collection = db.collection(process.env.POST);
-  await collection.insertOne(blogPost);
-}
-
-app.post('/blogpost/new', async (req,res)=>{
- let blogpost = req.body.blogpost;
- await addNewBlogPost(blogpost);
- res.status(200).send();
-});
 
 //Routers and Router functions
 const authRouter = require('./routes/authRoutes');
+const blogpostRouter = require('./routes/blogpostRoutes')
 //const homeRouter = require('./routes/homeRoutes')(nav);
 //const adminRouter = require('./routes/adminRoutes')();
 // const aboutRouter = require('./');
@@ -53,6 +43,7 @@ const authRouter = require('./routes/authRoutes');
 
 //applying router middleware, mounting them on their paths
 app.use('/auth', authRouter);
+app.use('/blogpost', blogpostRouter);
 //app.use('/home', homeRouter);
 //app.use('/admin', adminRouter);
 
