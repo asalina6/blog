@@ -4,7 +4,7 @@ const jwt = require('jsonwebtoken');
 
 function blogpostController() {
 
-    dotenv.config({path: '../credentials.env'});
+    dotenv.config( {path: path.resolve(__dirname,'../credentials.env')});
 
     //helper function to post information to the database
     async function addNewBlogpostDB(blogpost){

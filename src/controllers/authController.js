@@ -1,13 +1,14 @@
 import { connectDB } from '../config/MongoDB/connect-mongodb';
 const dotenv = require('dotenv');
 const md5 = require('md5');
-const jwt = require('jsonwebtoken');
+const path = require('path');
+//const jwt = require('jsonwebtoken');
 
 function authController() {
 
-    dotenv.config({path: '../credentials.env'});
+    dotenv.config( {path: path.resolve(__dirname,'../credentials.env')});
 
-    function register(req, res) { //eslint-disable-line
+    async function register(req, res) { //eslint-disable-line
         console.log(req.body);
     }
 
@@ -17,27 +18,33 @@ function authController() {
             const passwordhash = md5(password);
 
             if(!username || !password){
-                return res.render(400);
-                //user did not input email or password
+                return res.json({error: "no input"});
+                //user did not input email or password. This is a huge error if this gets through.
             }
 
-            const db = connectDB();
-            const users = db.collection(process.env.USERS);
-            const query = users.findOne(
-                {username: {$eq: username}},
+            const db = await connectDB();
+            const users = await db.collection(process.env.USERS);
+            const query = await users.find(
+                {email: {$eq: username}},
                 {password: {$eq: passwordhash}}
             )
-            const count = query.count();
-            const id = query.id;
+            console.log(query);
+            
+            const count = await query.count();
+            console.log(count);
+            //const id = query.id;
 
             if(count === 0){
-                return res.render(400);
+                res.json({error: "invalid credentials"});
                 //user not found
             }else if(count > 1){
-                return res.render(400);
+                return res.json({error: "duplicate users"});
                 //we have duplicate users, an error on our part
             }else{
                 //jwt token time.
+                console.log('we made it to the token stage');
+                
+                /*
                 const token = jwt.sign({ id }, process.env.JWT_SECRET,{
                     expiresIn: process.env.JWT_EXPIRES_IN
                 }, (err, token) => console.log(token));
@@ -50,7 +57,8 @@ function authController() {
                 }
 
                 res.cookie('jwt', token, cookieOptions);
-                res.status(200).redirect("/");
+                */
+                return res.json({success: "success"});
             }
 
 

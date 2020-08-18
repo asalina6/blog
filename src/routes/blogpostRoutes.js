@@ -11,6 +11,8 @@ function Router(){
 
     blogpostRouter.route("/posts/new")
         .post(verifyToken, addNewBlogpostAPI); //make sure to verify token, then go to posting
+
+    return blogpostRouter();
 }
 
 //helper function

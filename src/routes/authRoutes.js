@@ -11,6 +11,7 @@ function router() {
     authRouter.route('/register')
         .post(register);
 
+    return authRouter;
 }
 
-export default router;
+module.exports = router;
