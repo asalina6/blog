@@ -1,6 +1,10 @@
 import { connectDB } from '../config/MongoDB/connect-mongodb';
 const dotenv = require('dotenv');
 const jwt = require('jsonwebtoken');
+const path = require('path');
+
+//Post Model
+const BlogPosts = require('../models/Posts.js');
 
 function blogpostController() {
 
@@ -30,10 +34,29 @@ function blogpostController() {
         let blogpost = req.body.blogpost;
         await addNewBlogpostDB(blogpost);
         res.status(200).send();
+
+        //another way is...
+        const newPost = new BlogPosts({
+            name: req.body.name
+        });
+
+        const savedPost = await newPost.save();
+        res.json(savedPost);
+    }
+
+    async function getAllBlogposts(req,res){
+        const allPosts = await BlogPosts.find({}).sort({date:-1});
+        res.json(allPosts);
+    }
+
+    async function findBlogpost(req,res){
+        console.log(req.id);
     }
 
     return ({
-        addNewBlogpostAPI
+        addNewBlogpostAPI,
+        getAllBlogposts,
+        findBlogpost
     });
 }
 
