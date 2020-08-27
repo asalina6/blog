@@ -2,7 +2,7 @@ main{
     width:var(--content-width);
     margin:auto;
     margin-top:1em;
-    height:80vh;
+    padding:1em 1em;
     border-radius:5px;
     overflow:hidden;
     box-shadow: 1px 11px 26px -8px rgba(0, 0, 0, 0.75);
@@ -12,9 +12,10 @@ main{
         display:grid;
         grid-template-columns:2fr 1fr;
     .sub-grid{
-        width:60%;
+        width:100%;
         display:grid;
-        grid-template-columns:1fr 1fr;
+        grid-template-columns:repeat(3, 1fr);
+        grid-template-rows:repeat(2, 1fr);
         column-gap:1em;
         row-gap: 1em;
         justify-content:center;
@@ -25,12 +26,12 @@ main{
             --card-width:15vw;
             width:var(--card-width);
             height:calc(3.5/2.5*var(--card-width));
-            background:red;
+            background:#63AD67;
             display:flex;
             justify-content:space-around;
             align-items:center;
             flex-direction:column;
-            transition: transform 500ms ease-in-out;
+            transition: transform 250ms ease-in-out;
             .image-container{
                 width:50%;
                 height:50%;
@@ -47,7 +48,8 @@ main{
                 }
                             }
             &:hover{
-                transform:scale(1.1);
+                transform:scale(1.01);
+                opacity:.75;
                     }
             }
         }

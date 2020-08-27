@@ -1,4 +1,4 @@
-import { MongoClient } from 'mongodb';
+const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 const path = require('path');
 const debug = require('debug')('server:connectDB');
@@ -12,10 +12,10 @@ export async function connectDB(){
         debug("DB exists");
         return db;
     }
-    let client;
     try{
-        client = await MongoClient.connect(url, {useNewUrlParser: true, useUnifiedTopology: true });
-        db = client.db(process.env.DB_NAME);
+        const client = await mongoose.connect(url, {useNewUrlParser: true, useUnifiedTopology: true });
+        console.log(client.db(process.env.DB_NAME));
+        //db = client.db(process.env.DB_NAME);
         debug("DB should be connected");
         return db;
     }catch(err){
