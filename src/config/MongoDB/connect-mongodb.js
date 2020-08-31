@@ -2,23 +2,20 @@ const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 const path = require('path');
 const debug = require('debug')('server:connectDB');
-dotenv.config( {path: path.resolve(__dirname,'./credentials.env')});
+const chalk = require('chalk');
 
+dotenv.config({ path: path.normalize(path.join(__dirname, '../', '../', 'credentials.env')) });
 const url = process.env.MDB_URL;
-let db = null;
 
-export async function connectDB(){
-    if(db){
-        debug("DB exists");
+async function connectDB(app, port) {
+    try {
+        const client = await mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true }); //eslint-disable-line
+        const db = mongoose.connection;
+        db.on('error', console.error.bind(console, 'connection error:'));
         return db;
-    }
-    try{
-        const client = await mongoose.connect(url, {useNewUrlParser: true, useUnifiedTopology: true });
-        console.log(client.db(process.env.DB_NAME));
-        //db = client.db(process.env.DB_NAME);
-        debug("DB should be connected");
-        return db;
-    }catch(err){
+    } catch (err) {
         debug(err);
     }
 }
+
+module.exports = connectDB;

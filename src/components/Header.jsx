@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import '../scss/_Header.scss';
 
@@ -14,7 +14,7 @@ function Header({ isLoggedin, setLoggedin }) { //eslint-disable-line
     );
 }
 
-function Nav({isLoggedin, setLoggedin}) { //eslint-disable-line
+function Nav({ isLoggedin, setLoggedin }) { //eslint-disable-line
     return (
         <>
             <nav>
@@ -27,24 +27,34 @@ function Nav({isLoggedin, setLoggedin}) { //eslint-disable-line
                             <li><Link to="/createpost">Create Post</Link></li>
                             <li><Link to="/account">Account</Link></li>
                         </>
-                    : '')}
+                        : '')}
                 </ul>
                 {// Find out a way to insert this here? <SigninBox isLoggedin={isLoggedin} setLoggedin={setLoggedin}/>
                 }
             </nav>
-            <SigninBox isLoggedin={isLoggedin} setLoggedin={setLoggedin}/>
+            <SigninBox isLoggedin={isLoggedin} setLoggedin={setLoggedin} />
         </>
     );
 }
 
-function SigninBox({isLoggedin, setLoggedin}) {//eslint-disable-line
+function SigninBox({ isLoggedin, setLoggedin }) {//eslint-disable-line
 
-    function handleLogout(){
-        const response = confirm('Are you sure you want to log out?')
-        if(response){
-            setLoggedin(false);
-            alert('You have been logged out');
-        }
+    function handleLogout() {
+        //IIFE that will fetch logout, turn the response to json, and then
+        //will decide what to do.
+        (async function logout() {
+            try {
+                const response = await fetch('http://localhost:3001/auth/logout');
+                const responseJSON = await response.json();
+                if (responseJSON.logout === 'success') {
+                    localStorage.removeItem('jwt');
+                    setLoggedin(false);
+                }
+            } catch (err) {
+                console.log(err);
+                alert('Error has occured');
+            }
+        }());
     }
 
     return isLoggedin ? (

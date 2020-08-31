@@ -5,16 +5,14 @@ const { isEmail } = require('validator');
 const Schema = mongoose.Schema;
 
 const usersSchema = new Schema({
-    authorId: {
-        type: Number,
-        required: true,
-        unique: true,
-    },
     firstName: {
         type: String,
-        required: true
+        required: [true, 'Please enter a first name']
     },
-    lastName: { type: String, required: true },
+    lastName: {
+        type: String,
+        required: [true, 'Please enter a last name']
+    },
     email: {
         type: String,
         required: [true, 'Please enter an email address'],
@@ -29,17 +27,17 @@ const usersSchema = new Schema({
     }
 });
 
-usersSchema.pre('save', async function(next){
+usersSchema.pre('save', async function (next) {
     const salt = await bcrypt.genSalt();
     this.password = await bcrypt.hash(this.password, salt);
     next();
 })
 
-usersSchema.statics.login = async function(email, password){
-    const user = await this.findOne({email});
-    if(user){
+usersSchema.statics.login = async function (email, password) {
+    const user = await this.findOne({ email });
+    if (user) {
         const auth = await bcrypt.compare(password, user.password);
-        if(auth){
+        if (auth) {
             return user;
         }
         throw Error('incorrect password');

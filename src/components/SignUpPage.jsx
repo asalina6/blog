@@ -1,17 +1,26 @@
 import React, { useState } from 'react';
-import '../scss/_LoginPage.scss';
-import { Redirect, Link } from 'react-router-dom'; //eslint-disable-line
+import '../scss/_SignUpPage.scss';
+import { Redirect } from 'react-router-dom'; //eslint-disable-line
 
-function LoginPage({ setLoggedin }) { //eslint-disable-line
+function SignUpPage({ setLoggedin }) { //eslint-disable-line
 
     const [email, setEmail] = useState(''); //eslint-disable-line
     const [password, setPassword] = useState(''); //eslint-disable-line
+    const [confirmPassword, setConfirmPassword] = useState(''); //eslint-disable-line
+    const [firstName, setFirstName] = useState(''); //eslint-disable-line
+    const [lastName, setLastName] = useState(''); //eslint-disable-line
+
     const [shouldRedirect, setShouldRedirect] = useState(false);
+
     const [emailError, setEmailError] = useState('');//eslint-disable-line
     const [passwordError, setPasswordError] = useState('');//eslint-disable-line
+    const [confirmPasswordError, setConfirmPasswordError] = useState('');//eslint-disable-line
+    const [firstNameError, setFirstNameError] = useState('');//eslint-disable-line
+    const [lastNameError, setLastNameError] = useState('');//eslint-disable-line
 
 
-    function checkErrors(response){
+
+    function checkErrors(response) {
         //if the response was not okay
         if (!response.ok) {
             throw new Error('Network response was not ok');
@@ -28,26 +37,28 @@ function LoginPage({ setLoggedin }) { //eslint-disable-line
 
         //going to need usestate to update.
 
-        (async function fetchLogin() {
+        (async function post_signup() {
             try {
                 //posting the login information, waiting for response
-                const response = await fetch('http://localhost:3001/auth/login', {
+                const response = await fetch('http://localhost:3001/auth/signup', {
                     method: 'POST',
+                    mode: 'same-origin',
+                    redirect: 'follow',
+                    credentials: 'include',
                     headers: {
                         'Content-Type': 'application/json',
                         'Accept': 'applications/json'
                     },
-                    body: JSON.stringify({ email, password })
+                    body: JSON.stringify({ firstName, lastName, email, password, confirmPassword })
                 });
-                
+
                 checkErrors(response);
+
                 //This is the JSON of the response
                 const responseJSON = await response.json();
                 console.log("This is the json of the response:", responseJSON);
                 //if there is a success property in the object, do this
                 if (responseJSON.success === 'success') {
-                    const token = responseJSON.jwt;
-                    localStorage.setItem('jwt', token);
                     setLoggedin(true);
                     setShouldRedirect(true);
                 }
@@ -64,10 +75,36 @@ function LoginPage({ setLoggedin }) { //eslint-disable-line
     }
 
     return !shouldRedirect ? (
-        <main className="form-container" onSubmit={submitHandler} method="post" >
+        <main className="form-container" onSubmit={submitHandler}>
             <div className="outside-box">
-                <form method="post">
-                    <h1>Sign in to Continue</h1>
+                <form>
+                    <h1>Sign Up</h1>
+
+                    <label htmlFor="firstName">First Name</label>
+                    <input
+                        type="text"
+                        id="firstName"
+                        name="firstName"
+                        placeholder="Enter First Name"
+                        required
+                        onChange={e => setFirstName(e.target.value)}
+                    />
+                    <div className="firstNameError error">
+                        {firstNameError}
+                    </div>
+
+                    <label htmlFor="lastName">Last Name</label>
+                    <input
+                        type="text"
+                        id="lastName"
+                        name="lastName"
+                        placeholder="Enter Last Name"
+                        required
+                        onChange={e => setLastName(e.target.value)}
+                    />
+                    <div className="lastNameError error">
+                        {lastNameError}
+                    </div>
 
                     <label htmlFor="username">Email</label>
                     <input
@@ -81,7 +118,6 @@ function LoginPage({ setLoggedin }) { //eslint-disable-line
                     <div className="emailError error">
                         {emailError}
                     </div>
-
                     <label htmlFor="password">Password</label>
                     <input
                         type="password"
@@ -93,17 +129,18 @@ function LoginPage({ setLoggedin }) { //eslint-disable-line
                     <div className="passwordError error">
                         {passwordError}
                     </div>
-                    <div className="remember-forgot-box">
-                        <div className="remember">
-                            <input type="checkbox" id="remember" name="remember" />
-                            <label htmlFor="remember">Remember me</label>
-                        </div>
-                        <a href="#">Forgot Password?</a>
+                    <label htmlFor="confirmPassword">Re-enter Your Password</label>
+                    <input
+                        type="password"
+                        id="confirmPassword"
+                        name="confirmPassword"
+                        placeholder="Re-enter password"
+                        required
+                        onChange={e => setConfirmPassword(e.target.value)} />
+                    <div className="passwordError error">
+                        {confirmPasswordError}
                     </div>
                     <button type="submit">Submit</button>
-                    <div className="register-box">
-                        Need an account? <Link to="/register">Register</Link>
-                    </div>
                 </form>
             </div>
         </main>
@@ -113,4 +150,4 @@ function LoginPage({ setLoggedin }) { //eslint-disable-line
 
 }
 
-export default LoginPage;
+export default SignUpPage;

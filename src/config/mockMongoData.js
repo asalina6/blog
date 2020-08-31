@@ -1,5 +1,7 @@
-
+const bcrypt = require('bcrypt');
 const md5 = require('md5');
+const salt = bcrypt.genSaltSync();
+
 const posts = [
     {
         postId: 1,
@@ -46,25 +48,22 @@ const posts = [
 ];
 const users = [
     {
-        authorId: 1,
         firstName: 'Armando',
         lastName: 'Salinas',
         email: 'armandosalinasiiiarizona@gmail.com',
-        passwordHash: md5('password')
+        password: bcrypt.hashSync('password', salt)
     },
     {
-        authorId: 2,
         firstName: 'Jane',
         lastName: 'Doe',
         email: 'janedoe555@gmail.com',
-        passwordHash: md5('password2')
+        password: bcrypt.hashSync('password2', salt)
     },
     {
-        authorId: 3,
         firstName: 'John',
         lastName: 'Doe',
         email: 'johndoe555@gmail.com',
-        passwordHash: md5('password3')
+        password: bcrypt.hashSync('password3', salt)
     },
 ];
 const newPost = [{
