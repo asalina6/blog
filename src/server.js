@@ -32,14 +32,11 @@ const adminRouter = require('./routes/adminRoutes')();
 //applying router middleware, mounting them on their paths
 app.use('/auth', authRouter);
 app.use('/admin', adminRouter);
-app.use('/', (req, res) => {
-  res.send('Welcome to the server');
-})
 //app.use('/blogpost', blogpostRouter);
 
 
 //This starts the connection to MongoDB and then starts the server port. Async function.
-const db = connectDB(app, port);
+const db = connectDB();
 
 app.listen(port, () => {
   debug(chalk.green(`Listening on port ${port}`));

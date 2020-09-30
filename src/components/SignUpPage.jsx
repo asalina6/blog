@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import '../scss/_SignUpPage.scss';
 import { Redirect } from 'react-router-dom'; //eslint-disable-line
 
-function SignUpPage({ setLoggedin }) { //eslint-disable-line
+function SignUpPage({ setLoggedin, setToken }) { //eslint-disable-line
 
     const [email, setEmail] = useState(''); //eslint-disable-line
     const [password, setPassword] = useState(''); //eslint-disable-line
@@ -27,6 +27,7 @@ function SignUpPage({ setLoggedin }) { //eslint-disable-line
         }
         //We make sure the content type of the response is JSON
         const contentType = response.headers.get('content-type');
+        console.log(contentType);
         if (!contentType || !contentType.includes('application/json')) {
             throw new TypeError("Oops, we haven't got JSON!");
         }
@@ -42,23 +43,22 @@ function SignUpPage({ setLoggedin }) { //eslint-disable-line
                 //posting the login information, waiting for response
                 const response = await fetch('http://localhost:3001/auth/signup', {
                     method: 'POST',
-                    mode: 'same-origin',
-                    redirect: 'follow',
                     credentials: 'include',
                     headers: {
                         'Content-Type': 'application/json',
-                        'Accept': 'applications/json'
+                        'Accept': 'application/json'
                     },
                     body: JSON.stringify({ firstName, lastName, email, password, confirmPassword })
                 });
-
                 checkErrors(response);
-
                 //This is the JSON of the response
                 const responseJSON = await response.json();
                 console.log("This is the json of the response:", responseJSON);
                 //if there is a success property in the object, do this
                 if (responseJSON.success === 'success') {
+                    const token = responseJSON.token;
+                    localStorage.set('jwt',token);
+                    setToken(token)
                     setLoggedin(true);
                     setShouldRedirect(true);
                 }
@@ -140,7 +140,7 @@ function SignUpPage({ setLoggedin }) { //eslint-disable-line
                     <div className="passwordError error">
                         {confirmPasswordError}
                     </div>
-                    <button type="submit">Submit</button>
+                    <button type="submit" disabled={!(email && password && confirmPassword && firstName && lastName)}>Submit</button>
                 </form>
             </div>
         </main>

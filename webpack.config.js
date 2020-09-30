@@ -1,19 +1,20 @@
 const webpack = require('webpack');
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const nodeExternals = require('webpack-node-externals');
 
 process.env.NODE_ENV = "development"; //important for babel to know we're in dev mode
 process.env.BABEL_ENV = "development";
 
-module.exports = {
+const browserConfig = {
     mode: 'development',
-    target: 'node', //could use node instead
+    target: 'web', //could use node instead
     devtool: 'cheap-module-source-map',
     entry: path.resolve(__dirname,'./src/index.js'),
     output: {
         path: path.resolve(__dirname, './dist'),
         publicPath: '/',
-        filename: 'bundle.js',
+        filename: 'bundle-front.js',
     },
     devServer: {
         inline:true,
@@ -24,7 +25,8 @@ module.exports = {
         historyApiFallback: true,
         disableHostCheck: true,
         headers: { "Access-Control-Allow-Origin": "*" },
-        https: false
+        https: false,
+        port: 3000
     },
     plugins: [
         new webpack.DefinePlugin({
@@ -68,3 +70,19 @@ module.exports = {
         ]
     }
 }
+
+const serverConfig = {
+    mode: 'development',
+    target: 'node', //could use node instead of browser
+    entry: path.resolve(__dirname,'./src/server.js'),
+    output: {
+        path: path.resolve(__dirname, './dist'),
+        publicPath: '/',
+        filename: 'bundle-back.js',
+        libraryTarget: 'commonjs'
+    },
+    externals: [nodeExternals()],
+}
+
+
+module.exports = [browserConfig, serverConfig];

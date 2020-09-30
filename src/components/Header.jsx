@@ -1,20 +1,26 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
+import Welcome from './Welcome.jsx';
 import '../scss/_Header.scss';
 
-function Header({ isLoggedin, setLoggedin }) { //eslint-disable-line
+function Header({ isLoggedIn, setIsLoggedIn, setToken, userFirstName, userLastName }) { //eslint-disable-line
     return (
-        <header>
-            <div className="image-container">
-                <a href="/"> <img src="https://freesvg.org/img/Prismatic-Perforated-Mandala-No-Background.png" alt="armando-logo" /> </a>
-            </div>
-            <h1>{"Armando's Blog"}</h1>
-            <Nav isLoggedin={isLoggedin} setLoggedin={setLoggedin} />
-        </header>
+        <>
+            <Welcome userFirstName={userFirstName} userLastName={userLastName} isLoggedIn={isLoggedIn}/>
+            <header>
+                <div className="image-container">
+                    <a href="/"> <img src="https://freesvg.org/img/Prismatic-Perforated-Mandala-No-Background.png" alt="armando-logo" /> </a>
+                </div>
+                <div className="title-container">
+                    <h1>{"Armando's Blog"}</h1>
+                </div>
+                <Nav isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} setToken={setToken}/>
+            </header>
+        </>
     );
 }
 
-function Nav({ isLoggedin, setLoggedin }) { //eslint-disable-line
+function Nav({ isLoggedIn, setIsLoggedIn, setToken}) { //eslint-disable-line
     return (
         <>
             <nav>
@@ -22,7 +28,7 @@ function Nav({ isLoggedin, setLoggedin }) { //eslint-disable-line
                     <li><Link to="/">Home</Link></li>
                     <li><Link to="/about">About</Link></li>
                     <li><Link to="/">Posts</Link></li>
-                    {(isLoggedin ?
+                    {(isLoggedIn ?
                         <>
                             <li><Link to="/createpost">Create Post</Link></li>
                             <li><Link to="/account">Account</Link></li>
@@ -32,23 +38,25 @@ function Nav({ isLoggedin, setLoggedin }) { //eslint-disable-line
                 {// Find out a way to insert this here? <SigninBox isLoggedin={isLoggedin} setLoggedin={setLoggedin}/>
                 }
             </nav>
-            <SigninBox isLoggedin={isLoggedin} setLoggedin={setLoggedin} />
+            <SigninBox setToken={setToken} isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
         </>
     );
 }
 
-function SigninBox({ isLoggedin, setLoggedin }) {//eslint-disable-line
-
+function SigninBox({ isLoggedIn, setIsLoggedIn, setToken }) {//eslint-disable-line
     function handleLogout() {
         //IIFE that will fetch logout, turn the response to json, and then
         //will decide what to do.
         (async function logout() {
             try {
-                const response = await fetch('http://localhost:3001/auth/logout');
+                const response = await fetch('http://localhost:3001/auth/logout',{
+                    credentials: 'include'
+                });
                 const responseJSON = await response.json();
                 if (responseJSON.logout === 'success') {
                     localStorage.removeItem('jwt');
-                    setLoggedin(false);
+                    setIsLoggedIn(false);
+                    setToken('');
                 }
             } catch (err) {
                 console.log(err);
@@ -57,7 +65,7 @@ function SigninBox({ isLoggedin, setLoggedin }) {//eslint-disable-line
         }());
     }
 
-    return isLoggedin ? (
+    return isLoggedIn ? (
         <div className="signinBox" onClick={handleLogout}>
             <Link to="/">Signout</Link>
         </div>

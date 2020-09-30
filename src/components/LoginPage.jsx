@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import '../scss/_LoginPage.scss';
 import { Redirect, Link } from 'react-router-dom'; //eslint-disable-line
 
-function LoginPage({ setLoggedin }) { //eslint-disable-line
+function LoginPage({ setIsLoggedIn, setToken }) { //eslint-disable-line
 
     const [email, setEmail] = useState(''); //eslint-disable-line
     const [password, setPassword] = useState(''); //eslint-disable-line
@@ -35,8 +35,9 @@ function LoginPage({ setLoggedin }) { //eslint-disable-line
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
-                        'Accept': 'applications/json'
+                        'Accept': 'application/json'
                     },
+                    credentials: 'include',
                     body: JSON.stringify({ email, password })
                 });
                 
@@ -46,9 +47,10 @@ function LoginPage({ setLoggedin }) { //eslint-disable-line
                 console.log("This is the json of the response:", responseJSON);
                 //if there is a success property in the object, do this
                 if (responseJSON.success === 'success') {
-                    const token = responseJSON.jwt;
+                    const token = responseJSON.token;
+                    setToken(token);
                     localStorage.setItem('jwt', token);
-                    setLoggedin(true);
+                    setIsLoggedIn(true);
                     setShouldRedirect(true);
                 }
                 //if the response is an (error) array, do this
@@ -100,7 +102,7 @@ function LoginPage({ setLoggedin }) { //eslint-disable-line
                         </div>
                         <a href="#">Forgot Password?</a>
                     </div>
-                    <button type="submit">Submit</button>
+                    <button type="submit" disabled={!(email && password)}>Submit</button>
                     <div className="register-box">
                         Need an account? <Link to="/register">Register</Link>
                     </div>

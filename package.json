@@ -8,11 +8,11 @@
     "test": "\"no test command\"",
     "pretest": "eslint --ignore-path .gitignore .",
     "start": "DEBUG=app,app:* nodemon app.js",
-    "dev": "webpack-dev-server --config webpack.config.js --port 3000",
+    "dev": "webpack-dev-server --config webpack.config.js",
     "initializeMDB": "NODE_ENV=development BABEL_ENV=development npx -p @babel/core -p @babel/node babel-node src/config/MongoDB/initialize-mongodb.js",
     "initializeMDB2": "npx babel-node src/config/MongoDB/initialize-mongodb.js",
     "server": "DEBUG=server,server:* babel-node src/server.js",
-    "start-dev": "run-p dev server"
+    "development": "run-p dev server"
   },
   "keywords": [
     "blog",
@@ -36,6 +36,7 @@
     "mongoose": "^5.10.0",
     "mysql": "^2.18.1",
     "react": "^16.13.1",
+    "react-cookie": "^4.0.3",
     "react-dom": "^16.13.1",
     "react-redux": "^7.2.1",
     "react-router-dom": "^5.2.0",
@@ -76,7 +77,7 @@
     "webpack": "^4.44.1",
     "webpack-cli": "^3.3.12",
     "webpack-dev-server": "^3.11.0",
-    "webpack-node-externals": "^2.5.1"
+    "webpack-node-externals": "^2.5.2"
   },
   "engines": {
     "node": ">=8"
