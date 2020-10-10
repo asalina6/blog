@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import image404 from '../images/vincent-van-zalinge-4B5F388MLE4-unsplash.jpg';
+import '../scss/PageNotFound.scss';
 
 function PageNotFound(props){ //eslint-disable-line
     return(

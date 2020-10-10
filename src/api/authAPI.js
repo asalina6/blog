@@ -1,4 +1,4 @@
-class authAPI{
+/*class authAPI{
     constructor(){
         this.instance = null;
     }
@@ -19,4 +19,4 @@ class authAPI{
     };
 }
 
-export default authAPI;
+export default authAPI;*/

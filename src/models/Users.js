@@ -24,7 +24,8 @@ const usersSchema = new Schema({
         type: String,
         required: [true, 'Please enter a password'],
         minlength: [6, 'Minimum password lenght is 6 characters']
-    }
+    },
+    posts: [{type: Schema.Types.ObjectId, ref: 'Posts'}]
 });
 
 usersSchema.pre('save', async function (next) {

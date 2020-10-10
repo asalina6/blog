@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types'
-
+import '../scss/Main.scss';
 
 //dumb component
 function Main(props) { //eslint-disable-line

@@ -1,7 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Welcome from './Welcome.jsx';
-import '../scss/_Header.scss';
+import '../scss/Header.scss';
+import '../scss/_Nav.scss';
 
 function Header({ isLoggedIn, setIsLoggedIn, setToken, userFirstName, userLastName }) { //eslint-disable-line
     return (

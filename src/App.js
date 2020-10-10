@@ -8,6 +8,7 @@ import SignUpPage from './components/SignUpPage.jsx';
 import PageNotFound from './components/PageNotFound.jsx';
 import About from './components/About.jsx';
 import Footer from './components/Footer.jsx';
+import CreatePost from './components/CreatePost.jsx';
 import './scss/styles.scss';
 
 
@@ -83,6 +84,9 @@ function App(props) { //eslint-disable-line
                     </Route>
                     <Route path="/register">
                         <SignUpPage setIsLoggedIn={setIsLoggedIn} setToken={setToken}/>
+                    </Route>
+                    <Route path="/createPost">
+                        <CreatePost isLoggedIn={isLoggedIn}/>
                     </Route>
                     <Route>
                         <PageNotFound />

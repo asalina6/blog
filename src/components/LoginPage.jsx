@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import '../scss/_LoginPage.scss';
+import '../scss/LoginPage.scss';
 import { Redirect, Link } from 'react-router-dom'; //eslint-disable-line
 
 function LoginPage({ setIsLoggedIn, setToken }) { //eslint-disable-line

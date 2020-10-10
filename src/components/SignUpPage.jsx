@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import '../scss/_SignUpPage.scss';
 import { Redirect } from 'react-router-dom'; //eslint-disable-line
+import '../scss/SignUpPage.scss';
 
 function SignUpPage({ setLoggedin, setToken }) { //eslint-disable-line
 

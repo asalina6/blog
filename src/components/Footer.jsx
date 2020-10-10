@@ -1,5 +1,5 @@
 import React from 'react';
-import '../scss/_Footer.scss';
+import '../scss/Footer.scss';
 
 function Footer(props){ //eslint-disable-line
     return(

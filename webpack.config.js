@@ -56,10 +56,18 @@ const browserConfig = {
                 use: "eslint-loader"
             },
             {
+                //source map may not work with singleton
                 test: /(\.css)$/,
-                use: ["style-loader", "css-loader"]
+                use: [
+                    {
+                        loader: "style-loader",
+                        options: { injectType: 'singletonStyleTag'},
+                    },
+                    "css-loader",
+                ]
             },
             {
+                
                 test:/(\.scss)$/,
                 use: ["style-loader", "css-loader", "sass-loader"]
             },

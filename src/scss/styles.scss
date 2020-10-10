@@ -1,6 +1,22 @@
 @import '_reset.scss';
 @import '_normalize.scss';
 @import url('https://fonts.googleapis.com/css2?family=Alata&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Concert+One&display=swap');
+
+@mixin button-style{
+    font-family:var(--font-family);
+    font-weight:700;
+    text-decoration:none;
+    color: white;
+    text-align:center;
+    vertical-align:center;
+    text-transform:uppercase;
+    background:#63ad67;
+    padding:0.5em 0.5em;
+    border-radius:10px;
+    border:none;
+}
+
 
 :root{
     --background-color:#D7F2BA;
@@ -30,9 +46,10 @@ main{
     background: var(--inner-background);
 }
 
-@import '_Header.scss';
-@import '_Main.scss';
-@import '_LoginPage.scss';
-@import '_SignUpPage.scss';
-@import '_PageNotFound.scss';
-@import '_Footer.scss';
+
+@import 'Header.scss';
+@import 'Main.scss';
+@import 'LoginPage.scss';
+@import 'SignUpPage.scss';
+@import 'PageNotFound.scss';
+@import 'Footer.scss';
